@@ -1,0 +1,24 @@
+# screw.rib
+
+Format 256 256 1
+Display "screw.pbm" "file" "rgb"
+PixelSamples 1 1
+PixelFilter "gaussian" 1 1
+Projection "perspective" "fov" 20
+
+ShadingRate 1
+
+WorldBegin
+  LightSource "distantlight" 2 "color" [0.8 0.8 1] "intensity" 1.0 "from" [-4 -4 -2] "to" [0 0 0]
+  LightSource "distantlight" 2 "color" [1 1 1] "intensity" 1.0 "from" [4 4 -2] "to" [0 0 0]
+
+  Translate 0 0 5
+
+  Rotate 90 1 0 0
+
+  Surface "plastic" "roughness" 0.1
+  Displacement "threads" "Km" 0.2 "dampzone" 0.05 "frequency" 5
+
+  Cylinder 1 -1 1 360
+
+WorldEnd

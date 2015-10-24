@@ -1,0 +1,50 @@
+# shadowtest.rib
+Format 1024 1024 1
+ShadingRate 1
+Projection "perspective" "fov" 30
+Quantize "z" 255 0 10 0
+
+# Render shadowtest.z
+FrameBegin 1
+  Display "shadowtest.z" "file" "z"
+  Translate 0 0 15
+  WorldBegin
+    LightSource "spotlight" 2 "color" [0.5 0.5 1] "intensity" 0.0 "from" [-1 -1 -20] "to" [0 0 0]
+#    Color [1 0.5 0.1]
+#    Surface "checker" "Ka" .0 "Ks" .5 "Kd" 1 "roughness" 0.05 "sfreq" 40 "tfreq" 60 "darkcolour" [.5 .5 .5]
+    TransformBegin
+      Translate 0 0 0
+      Scale 4 4 4
+      Sphere 1 -1 1 360
+    TransformEnd
+    TransformBegin
+      Translate 0 0 -8
+      Sphere 1 -1 1 360
+    TransformEnd
+  WorldEnd
+FrameEnd
+
+Format 256 256 1
+
+# Now do rendering for real
+FrameBegin 1
+  Display "shadowtest.pbm" "file" "rgba"
+  Translate 0 -1 13
+  Rotate 20 1 0 0
+  WorldBegin
+    LightSource "shadowspot" 2 "color" [0.5 0.5 1] "intensity" 400.0 "from" [0 0 -20] "to" [0 0 0] "map" "shadowtest.z" "coneangle" 9 "conedeltaangle" 10 "radius" 0.01
+    LightSource "distantlight" 2 "color" [1 1 0.4] "intensity" 1 "from" [10 -2 30] "to" [0 0 0]
+    Color [1 1 1]
+    Surface "checker" "Ka" .0 "Ks" .5 "Kd" 1 "roughness" 0.05 "sfreq" 40 "tfreq" 60 "darkcolour" [.5 .5 .5]
+    TransformBegin
+      Translate 0 0 0
+      Scale 4 4 4
+      Sphere 1 -1 1 360
+    TransformEnd
+    Color [1 0.5 0.1]
+    TransformBegin
+      Translate 0 0 -8
+      Sphere 1 -1 1 360
+    TransformEnd
+  WorldEnd
+FrameEnd

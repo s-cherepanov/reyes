@@ -1,0 +1,26 @@
+# woodensphere.rib
+
+Format 256 256 1
+Display "woodensphere.pbm" "file" "rgb"
+PixelSamples 4 4
+PixelFilter "gaussian" 4 4
+Projection "perspective" "fov" 25
+
+ShadingRate 2
+
+WorldBegin
+  LightSource "distantlight" 2 "color" [0.8 0.8 1] "intensity" 4.0 "from" [-4 -4 -2] "to" [0 0 0]
+  LightSource "distantlight" 2 "color" [1 1 1] "intensity" 4.0 "from" [4 4 -2] "to" [0 0 0]
+
+  Sides 2
+
+  Translate 0 0 3
+  Rotate 45 1 0 0
+  Rotate 120 0 0 1
+
+  Surface "wood" "ringscale" 10 "Kd" 1.0 "Ks" 0.1
+
+#  Displacement "fractal" "freq" 5 "power" 3 "height" 0.1
+
+  Sphere 1 -1 1 360
+WorldEnd
